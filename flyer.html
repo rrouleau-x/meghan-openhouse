@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open House Flyer · 6 Brewers Landing · Seabolt Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --dark-gray: #474747;
+    --med-gray: #919191;
+    --light-gray: #E7E7E7;
+    --red: #A33038;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: "Libre Baskerville", Georgia, "Times New Roman", serif; }
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--med-gray); }
+  .eyebrow.red { color: var(--red); }
+
+  /* US Letter portrait */
+  .sheet {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== Hero photo band ===== */
+  .hero {
+    position: relative;
+    height: 4.35in;
+    background: url('img/1_dsc03593.jpg') center 55% / cover no-repeat;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.66) 100%);
+  }
+  .hero-content {
+    position: absolute; left:0; right:0; bottom:0; z-index:2;
+    padding: 0.5in 0.5in 0.45in;
+    color:#fff;
+  }
+  .hero .eyebrow { color: rgba(255,255,255,0.9); letter-spacing: 4px; }
+  .hero .eyebrow .red { color:#E8A0A5; }
+  .hero h1 {
+    font-family:"Libre Baskerville", Georgia, serif; font-weight:400;
+    font-size: 44px; line-height:1.05; letter-spacing:-0.5px; margin-top:8px;
+  }
+  .hero .city { font-size: 15px; font-weight:300; letter-spacing:0.6px; color:rgba(255,255,255,0.95); margin-top:4px; }
+  .hero .price { font-family:"Libre Baskerville", Georgia, serif; font-size: 26px; margin-top:10px; }
+
+  /* ===== Stats strip ===== */
+  .stats {
+    display:flex;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .stat {
+    flex:1; text-align:center; padding: 0.28in 0.1in;
+    border-left: 1px solid var(--light-gray);
+  }
+  .stat:first-child { border-left:none; }
+  .stat .val { font-size: 26px; font-weight:300; line-height:1; }
+  .stat .val.serif { font-family:"Libre Baskerville", Georgia, serif; font-size: 21px; }
+  .stat .lbl { font-size: 9px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; color:var(--med-gray); margin-top:8px; }
+
+  /* ===== Body ===== */
+  .body { padding: 0.42in 0.5in 0.3in; }
+
+  .open-house {
+    background: var(--black); color:#fff;
+    text-align:center; padding: 0.26in 0.2in;
+  }
+  .open-house .oh-label { font-size: 10px; letter-spacing:3px; text-transform:uppercase; color:#E8A0A5; font-weight:600; }
+  .open-house .oh-date { font-family:"Libre Baskerville", Georgia, serif; font-size: 24px; margin-top:6px; }
+  .open-house .oh-time { font-size: 13px; letter-spacing:1.6px; text-transform:uppercase; margin-top:4px; color: rgba(255,255,255,0.9); }
+
+  .description {
+    font-size: 12.5px; color: var(--dark-gray); line-height:1.65;
+    margin: 0.3in 0 0.28in;
+  }
+
+  .highlights { margin-bottom: 0.28in; }
+  .highlights h3 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size: 16px; margin-bottom: 10px; }
+  .hl-grid { display:flex; flex-wrap:wrap; gap: 6px 16px; }
+  .hl { font-size: 11px; color: var(--dark-gray); }
+  .hl .tick { color: var(--red); font-weight:700; margin-right:4px; }
+
+  /* ===== Footer contact ===== */
+  .contact {
+    border-top: 1px solid var(--light-gray);
+    padding: 0.3in 0.5in 0.34in;
+    text-align:center;
+  }
+  .contact .brand { font-size: 14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+  .contact .sub { font-size: 8px; font-weight:500; color:#a8a8a8; letter-spacing:1.6px; text-transform:uppercase; margin-top:5px; }
+  .contact .sub .red { color: var(--red); }
+  .contact .phone { font-size: 16px; font-weight:600; letter-spacing:1px; margin: 12px 0 4px; }
+  .contact .agent { font-size: 11px; color: var(--dark-gray); }
+  .contact .compliance { font-size: 8px; color:#a8a8a8; margin-top: 12px; max-width: 6.6in; margin-left:auto; margin-right:auto; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ===== Photo ===== -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="eyebrow">Open House <span class="red">·</span> Tybee Island</span>
+      <h1>6 Brewers Landing</h1>
+      <div class="city">Tybee Island, Georgia</div>
+      <div class="price">$599,000</div>
+    </div>
+  </div>
+
+  <!-- ===== Stats ===== -->
+  <div class="stats">
+    <div class="stat"><div class="val">3</div><div class="lbl">Beds</div></div>
+    <div class="stat"><div class="val">3</div><div class="lbl">Baths</div></div>
+    <div class="stat"><div class="val">1,744</div><div class="lbl">Sq Ft</div></div>
+    <div class="stat"><div class="val">2004</div><div class="lbl">Built</div></div>
+  </div>
+
+  <!-- ===== Body ===== -->
+  <div class="body">
+
+    <div class="open-house">
+      <div class="oh-label">Open House</div>
+      <div class="oh-date">Sunday, September 6</div>
+      <div class="oh-time">1:00 – 3:00 PM</div>
+    </div>
+
+    <p class="description">
+      Experience the best of Tybee Island living! Gorgeous tidal creek views, a spacious living room with fireplace and screened porch, an updated kitchen, and a third-floor balcony for coastal breezes and bird watching. Three bedrooms, three full baths, and an oversized two-car garage for all the toys. No HOA — lock-and-go ease with single-family feel, quietly located on a cul-de-sac and a short walk, bike, or golf-cart ride to the beach.
+    </p>
+
+    <div class="highlights">
+      <h3>Highlights</h3>
+      <div class="hl-grid">
+        <div class="hl"><span class="tick">—</span>Tidal Creek &amp; Marsh Views</div>
+        <div class="hl"><span class="tick">—</span>Fireplace</div>
+        <div class="hl"><span class="tick">—</span>Screened Porch</div>
+        <div class="hl"><span class="tick">—</span>Third-Floor Balcony</div>
+        <div class="hl"><span class="tick">—</span>Oversized 2-Car Garage</div>
+        <div class="hl"><span class="tick">—</span>No HOA</div>
+        <div class="hl"><span class="tick">—</span>End Unit</div>
+        <div class="hl"><span class="tick">—</span>Walk / Bike to Beach</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Contact ===== -->
+  <div class="contact">
+    <div class="brand">Seabolt Real Estate</div>
+    <div class="sub">Christie's International Real Estate <span class="red">·</span> Exclusive Affiliate, Coast of Georgia</div>
+    <div class="phone">912.233.6609</div>
+    <div class="agent">Meghan Littlefield · meghan@seaboltrealestate.com · MLS #SA350357</div>
+    <div class="compliance">
+      GREC compliance: Seabolt Real Estate, the licensed brokerage, is presented with equal or greater prominence than any affiliated agent. Information believed reliable but not guaranteed — verify all details. Equal Housing Opportunity.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
