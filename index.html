@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Residence · 1234 Willow Lane · Seabolt Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --dark-gray: #474747;   /* Pantone 425 */
+    --med-gray: #919191;    /* Pantone 428 */
+    --light-gray: #E7E7E7;  /* Pantone 433 */
+    --red: #A33038;         /* Pantone 1807 — minimal highlight only */
+    --hairline: #E7E7E7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: "Libre Baskerville", Georgia, "Times New Roman", serif; }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--med-gray);
+  }
+  .eyebrow.red { color: var(--red); }
+
+  /* ===== Header (transparent → solid on scroll) ===== */
+  .site-head {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    transition: background .3s ease, box-shadow .3s ease, border-color .3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .site-head.solid {
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom-color: var(--hairline);
+  }
+  .site-head-inner {
+    max-width: 1240px; margin:0 auto; padding:18px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--black); }
+  .site-head:not(.solid) .logo, .site-head:not(.solid) .nav-links a { color: #fff; }
+  .logo-window {
+    width:38px; height:38px; flex-shrink:0;
+    background: linear-gradient(135deg, #6b6b6b 0%, #2e2e2e 100%);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; font-family:"Libre Baskerville", serif;
+  }
+  .logo-text { font-size:13px; font-weight:700; letter-spacing:2.2px; text-transform:uppercase; line-height:1.2; }
+  .logo-text small { display:block; font-size:8.5px; font-weight:500; color:var(--med-gray); letter-spacing:1.4px; text-transform:uppercase; margin-top:3px; }
+  .site-head:not(.solid) .logo-text small { color: rgba(255,255,255,0.7); }
+  .nav-links { display:flex; gap:26px; }
+  .nav-links a {
+    font-size:11px; font-weight:600; letter-spacing:1.6px; text-transform:uppercase;
+    color: var(--dark-gray); text-decoration:none; transition: opacity .15s;
+  }
+  .nav-links a:hover { opacity:0.6; }
+
+  /* ===== Hero — image dominant, 85vh ===== */
+  .hero {
+    position:relative; min-height: 85vh;
+    display:flex; align-items:flex-end;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(71,71,71,0.5) 0%, rgba(0,0,0,0) 60%),
+      linear-gradient(160deg, #3a3a3a 0%, #141414 70%, #000 100%);
+    color:#fff; overflow:hidden;
+  }
+  /* Placeholder hero art — swap for full-bleed listing photography */
+  .hero-ph {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    opacity:0.55;
+  }
+  .hero-ph svg { width:120px; height:120px; stroke:#fff; }
+  .hero-overlay {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.72) 100%);
+  }
+  .hero-content {
+    position:relative; z-index:2;
+    max-width:1240px; margin:0 auto; width:100%;
+    padding: 120px 28px 64px;
+  }
+  .hero .eyebrow { color: rgba(255,255,255,0.75); letter-spacing:4px; margin-bottom:18px; display:block; }
+  .hero .eyebrow .red { color:#E8A0A5; }
+  .hero h1 {
+    font-family:"Libre Baskerville", Georgia, serif;
+    font-weight:400; font-size: clamp(34px, 6.4vw, 64px);
+    line-height:1.08; letter-spacing:-0.5px; margin-bottom:10px;
+  }
+  .hero .city { font-size: clamp(15px, 2.6vw, 19px); font-weight:300; letter-spacing:0.4px; color:rgba(255,255,255,0.85); margin-bottom:26px; }
+  .hero .openhouse {
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+    color:rgba(255,255,255,0.9);
+    border:1px solid rgba(255,255,255,0.4); border-radius:999px;
+    padding:10px 22px; margin-bottom:28px;
+  }
+  .hero .openhouse .dot { width:5px; height:5px; border-radius:50%; background:#E8A0A5; }
+  .hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+  .btn {
+    display:inline-flex; align-items:center; gap:10px;
+    background: var(--white); color: var(--black) !important;
+    font-size:12px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase;
+    border:none; border-radius:0; padding:16px 30px; text-decoration:none;
+    transition: background .2s, color .2s, transform .12s;
+  }
+  .btn:hover { background: var(--light-gray); transform: translateY(-1px); }
+  .btn-ghost {
+    background:transparent; color:#fff !important;
+    border:1px solid rgba(255,255,255,0.55);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+  .btn svg { width:15px; height:15px; }
+
+  /* ===== Stats — minimal, thin separators ===== */
+  .stats { border-bottom: 1px solid var(--hairline); }
+  .stats-inner {
+    max-width:1240px; margin:0 auto; padding: 56px 28px;
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:36px 0;
+  }
+  @media (min-width: 720px) {
+    .stats-inner { grid-template-columns: repeat(4, 1fr); }
+    .stat + .stat { border-left: 1px solid var(--hairline); padding-left: 40px; }
+  }
+  .stat .val { font-size: clamp(34px, 5vw, 44px); font-weight:300; line-height:1; letter-spacing:-0.5px; }
+  .stat .val .unit { font-size: 0.5em; color: var(--med-gray); }
+  .stat .lbl { font-size:10px; font-weight:600; letter-spacing:2.2px; text-transform:uppercase; color:var(--med-gray); margin-top:12px; }
+
+  /* ===== Sections ===== */
+  .section { max-width:1240px; margin:0 auto; padding: 96px 28px; }
+  .section-head { margin-bottom:48px; max-width:560px; }
+  .section-head.center { text-align:center; margin-left:auto; margin-right:auto; }
+  .section-head h2 {
+    font-family:"Libre Baskerville", Georgia, serif;
+    font-weight:400; font-size: clamp(26px, 4vw, 38px); letter-spacing:-0.3px;
+    margin-top:14px; line-height:1.2;
+  }
+  .section-head p { color:var(--med-gray); font-size:14px; margin-top:14px; }
+  .section-head .rule { width:44px; height:2px; background: var(--red); margin-top:20px; }
+  .section-head.center .rule { margin-left:auto; margin-right:auto; }
+
+  /* ===== Gallery — editorial masonry ===== */
+  .gallery { display:grid; grid-template-columns: 1fr; gap:14px; }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; } }
+  .gallery-card {
+    position:relative; overflow:hidden;
+    background: linear-gradient(140deg, #eaeaea 0%, #d4d4d4 100%);
+    border:1px solid var(--hairline);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+    color: var(--med-gray);
+  }
+  @media (min-width: 720px) {
+    .gallery-card.tall { grid-row: span 2; }
+    .gallery-card.wide { grid-column: span 2; }
+    .gallery-card.full { grid-column: 1 / -1; grid-row: span 2; }
+  }
+  .gallery-card svg { width:26px; height:26px; opacity:0.5; }
+  .gallery-card .ph { font-size:10.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:0.55; }
+
+  /* ===== Editorial quote band ===== */
+  .quote-band { border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+  .quote-band-inner { max-width:900px; margin:0 auto; padding: 110px 28px; text-align:center; }
+  .quote-band .mark { font-family:"Libre Baskerville", Georgia, serif; font-size:64px; line-height:0.6; color: var(--red); display:block; margin-bottom:28px; }
+  .quote-band blockquote {
+    font-family:"Libre Baskerville", Georgia, serif; font-style:italic;
+    font-weight:400; font-size: clamp(22px, 3.6vw, 32px); line-height:1.5; color: var(--black);
+  }
+  .quote-band .attr { font-size:11px; font-weight:600; letter-spacing:2.6px; text-transform:uppercase; color:var(--med-gray); margin-top:26px; }
+
+  /* ===== Signature Details ===== */
+  .details-grid { display:grid; grid-template-columns:1fr; gap:18px; }
+  @media (min-width: 960px) { .details-grid { grid-template-columns: repeat(3, 1fr); } }
+  .detail-story {
+    border:1px solid var(--hairline);
+    display:flex; flex-direction:column;
+  }
+  .detail-story .img {
+    aspect-ratio: 4/3; background: linear-gradient(140deg, #eaeaea 0%, #d4d4d4 100%);
+    display:flex; align-items:center; justify-content:center; color: var(--med-gray);
+  }
+  .detail-story .img svg { width:30px; height:30px; opacity:0.5; }
+  .detail-story .body { padding:28px 26px 34px; }
+  .detail-story h3 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size:21px; margin-bottom:10px; }
+  .detail-story p { font-size:13.5px; color:var(--med-gray); }
+
+  /* Secondary details — minimal list */
+  .secondary {
+    border-top:1px solid var(--hairline);
+    display:grid; grid-template-columns:1fr; margin-top:56px;
+  }
+  @media (min-width: 720px) { .secondary { grid-template-columns: repeat(2, 1fr); } }
+  .secondary .item {
+    padding: 20px 4px; display:flex; align-items:baseline; gap:18px;
+    border-bottom:1px solid var(--hairline);
+  }
+  @media (min-width: 720px) {
+    .secondary .item:nth-child(odd) { border-right:1px solid var(--hairline); padding-right:28px; }
+    .secondary .item:nth-child(even) { padding-left:28px; }
+  }
+  .secondary .item .num { font-family:"Libre Baskerville", Georgia, serif; font-size:15px; color: var(--red); }
+  .secondary .item .name { font-size:12.5px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; }
+  .secondary .item .desc { font-size:12.5px; color:var(--med-gray); margin-left:auto; text-align:right; }
+
+  /* ===== Location / Neighborhood ===== */
+  .location { border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); background:#FBFBFB; }
+  .location-inner { max-width:1240px; margin:0 auto; padding: 96px 28px; display:grid; grid-template-columns:1fr; gap:48px; }
+  @media (min-width: 960px) { .location-inner { grid-template-columns: 1fr 1fr; gap:64px; align-items:start; } }
+  .neighborhood p.statement {
+    font-family:"Libre Baskerville", Georgia, serif; font-size: clamp(17px, 2.4vw, 21px); line-height:1.6; color: var(--dark-gray); margin: 20px 0 36px;
+  }
+  .landmark { display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--hairline); }
+  .landmark:last-child { border-bottom:none; }
+  .landmark .idx { font-size:10.5px; font-weight:600; letter-spacing:1.6px; color:var(--med-gray); width:26px; flex-shrink:0; }
+  .landmark .name { font-size:13px; font-weight:600; letter-spacing:0.6px; }
+  .landmark .dist { margin-left:auto; font-size:11.5px; color:var(--med-gray); letter-spacing:0.5px; }
+  .map-frame { border:1px solid var(--hairline); line-height:0; }
+  .map-frame iframe { width:100%; height:100%; min-height:420px; border:0; }
+
+  /* ===== Listing Representation ===== */
+  .agent { background: var(--white); }
+  .agent-inner {
+    max-width:1240px; margin:0 auto; padding: 96px 28px;
+    display:grid; grid-template-columns:1fr; gap:48px;
+  }
+  @media (min-width: 960px) { .agent-inner { grid-template-columns: 320px 1fr; gap:64px; align-items:start; } }
+  .agent-portrait {
+    aspect-ratio: 4/5; background: linear-gradient(140deg, #eaeaea 0%, #d4d4d4 100%);
+    display:flex; align-items:center; justify-content:center; color: var(--med-gray);
+    border:1px solid var(--hairline);
+  }
+  .agent-portrait svg { width:64px; height:64px; opacity:0.5; }
+  .agent-info h2 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size: clamp(26px, 4vw, 36px); letter-spacing:-0.3px; }
+  .agent-info .title { font-size:11px; font-weight:600; letter-spacing:2.4px; text-transform:uppercase; color:var(--med-gray); margin-top:6px; margin-bottom:20px; }
+  .agent-info .brokerage {
+    display:inline-flex; align-items:center; gap:10px; flex-wrap:wrap;
+    font-size:12.5px; font-weight:700; letter-spacing:0.6px; color: var(--black);
+    padding:12px 20px; border:1px solid var(--black); margin-bottom:22px;
+  }
+  .agent-info .brokerage .red { color: var(--red); font-weight:800; letter-spacing:0.3px; }
+  .agent-info .bio { font-size:14px; color:var(--med-gray); max-width:540px; }
+  .agent-contact { display:flex; gap:14px; flex-wrap:wrap; margin-top:28px; }
+
+  /* ===== Open House Invitation (RSVP) ===== */
+  .invite { background: linear-gradient(160deg, #2a2a2a 0%, #000 100%); color:#fff; }
+  .invite-inner { max-width:900px; margin:0 auto; padding: 110px 28px; text-align:center; }
+  .invite .eyebrow { color: rgba(255,255,255,0.65); letter-spacing:4px; }
+  .invite h2 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size: clamp(28px, 5vw, 44px); margin:18px 0 14px; }
+  .invite p { color: rgba(255,255,255,0.8); font-size:14px; max-width:480px; margin:0 auto 36px; }
+  .invite .date-line { font-size:12px; font-weight:600; letter-spacing:2.4px; text-transform:uppercase; color:rgba(255,255,255,0.9); margin-bottom:36px; }
+  .invite .date-line .dot { color:#E8A0A5; margin:0 8px; }
+  .invite-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .invite .btn { background:#fff; color:var(--black) !important; }
+  .invite .btn:hover { background: var(--light-gray); }
+  .invite .btn-ghost { background:transparent; color:#fff !important; border-color: rgba(255,255,255,0.55); }
+  .invite .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+  .invite .secondary-link { display:inline-block; margin-top:26px; font-size:11px; letter-spacing:1.8px; text-transform:uppercase; color:rgba(255,255,255,0.7); text-decoration:underline; text-underline-offset:4px; }
+
+  /* ===== Footer ===== */
+  .site-foot { background: var(--black); color:#fff; }
+  .site-foot-inner { max-width:1240px; margin:0 auto; padding:56px 28px; text-align:center; }
+  .site-foot .ft-brand { font-size:14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+  .site-foot .ft-sub { font-size:9px; font-weight:500; color:#a8a8a8; letter-spacing:1.6px; text-transform:uppercase; margin-top:6px; }
+  .site-foot .ft-sub .red { color:#E8A0A5; }
+  .site-foot .phone { font-size:15px; font-weight:600; letter-spacing:1px; margin:22px 0 6px; }
+  .site-foot .addr { font-size:12.5px; color:#c9c9c9; }
+  .site-foot .compliance { font-size:10.5px; color:#8a8a8a; margin-top:26px; max-width:680px; margin-left:auto; margin-right:auto; line-height:1.7; }
+
+  /* ===== Reveal animation (subtle) ===== */
+  .reveal { opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+  /* ===== Mobile nav ===== */
+  @media (max-width: 720px) {
+    .nav-links { display:none; }
+    .site-head-inner { padding:14px 20px; }
+    .hero { min-height: 92vh; }
+    .section { padding: 72px 20px; }
+    .location-inner, .agent-inner { padding: 72px 20px; }
+    .quote-band-inner, .invite-inner { padding: 80px 20px; }
+    .stats-inner { padding: 44px 20px; gap: 28px 0; }
+    .stat:nth-child(odd) { border-right:1px solid var(--hairline); padding-right:20px; }
+    .stat:nth-child(even) { padding-left:20px; }
+    .hero-actions .btn { width:100%; justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-head" id="siteHead">
+  <div class="site-head-inner">
+    <a class="logo" href="#top">
+      <span class="logo-window">S</span>
+      <span class="logo-text">Seabolt Real Estate<small>Christie's International · Georgia Coast</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#residence">Residence</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#details">Details</a>
+      <a href="#location">Location</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="top">
+  <div class="hero-ph" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Open House <span class="red">·</span> By Appointment</span>
+    <h1>1234 Willow Lane</h1>
+    <div class="city">Savannah, Georgia</div>
+    <div class="openhouse"><span class="dot"></span> Saturday, October 17, 2026 · 12 – 4 PM</div>
+    <div class="hero-actions">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=1234+Willow+Lane+Savannah+GA+31401" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get Directions
+      </a>
+      <a class="btn btn-ghost" href="#invite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Attend the Open House
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Quick Facts ===== -->
+<div class="stats" id="residence">
+  <div class="stats-inner">
+    <div class="stat reveal"><div class="val">3</div><div class="lbl">Bedrooms</div></div>
+    <div class="stat reveal"><div class="val">2<span class="unit"></span></div><div class="lbl">Bathrooms</div></div>
+    <div class="stat reveal"><div class="val">1,850<span class="unit"> sq ft</span></div><div class="lbl">Living Area</div></div>
+    <div class="stat reveal"><div class="val">0.28<span class="unit"> ac</span></div><div class="lbl">Lot</div></div>
+  </div>
+</div>
+
+<!-- ===== Gallery (editorial masonry) ===== -->
+<section class="section" id="gallery">
+  <div class="section-head">
+    <span class="eyebrow red">Gallery</span>
+    <h2>The Residence</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="gallery">
+    <div class="gallery-card wide reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Front Facade</span>
+    </div>
+    <div class="gallery-card tall reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Kitchen</span>
+    </div>
+    <div class="gallery-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Living Room</span>
+    </div>
+    <div class="gallery-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Primary Suite</span>
+    </div>
+    <div class="gallery-card full reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Garden &amp; Exterior</span>
+    </div>
+    <div class="gallery-card tall reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Detail</span>
+    </div>
+    <div class="gallery-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="ph">Terrace</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Editorial quote band ===== -->
+<div class="quote-band">
+  <div class="quote-band-inner reveal">
+    <span class="mark">&ldquo;</span>
+    <blockquote>Exceptional Savannah living, presented with distinction.</blockquote>
+    <div class="attr">1234 Willow Lane</div>
+  </div>
+</div>
+
+<!-- ===== Signature Details ===== -->
+<section class="section" id="details">
+  <div class="section-head">
+    <span class="eyebrow red">Details</span>
+    <h2>Signature Details</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="details-grid">
+    <div class="detail-story reveal">
+      <div class="img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </div>
+      <div class="body">
+        <h3>The Kitchen</h3>
+        <p>Quartz countertops, a full suite of stainless appliances, and a generous island — the natural gathering point of the home.</p>
+      </div>
+    </div>
+    <div class="detail-story reveal">
+      <div class="img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M3 21l6-6 4 4 8-8"/><path d="M3 12h6"/></svg>
+      </div>
+      <div class="body">
+        <h3>The Garden</h3>
+        <p>A private, fully fenced yard with mature plantings — room for children, pets, and unhurried evenings outdoors.</p>
+      </div>
+    </div>
+    <div class="detail-story reveal">
+      <div class="img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>
+      </div>
+      <div class="body">
+        <h3>The Sunroom</h3>
+        <p>A bright four-season sunroom off the kitchen, overlooking the garden — light pours in from every direction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="secondary">
+    <div class="item reveal"><span class="num">01</span><span class="name">Hardwood Floors</span><span class="desc">Refinished oak throughout</span></div>
+    <div class="item reveal"><span class="num">02</span><span class="name">Two-Car Garage</span><span class="desc">Attached, with storage</span></div>
+    <div class="item reveal"><span class="num">03</span><span class="name">Historic District</span><span class="desc">Steps from the best of Savannah</span></div>
+    <div class="item reveal"><span class="num">04</span><span class="name">Built</span><span class="desc">Circa 1920, thoughtfully updated</span></div>
+    <div class="item reveal"><span class="num">05</span><span class="name">Zoned</span><span class="desc">Residential, established street</span></div>
+    <div class="item reveal"><span class="num">06</span><span class="name">Schools</span><span class="desc">Served by Savannah-Chatham</span></div>
+  </div>
+</section>
+
+<!-- ===== Location / Neighborhood ===== -->
+<section class="location" id="location">
+  <div class="location-inner">
+    <div class="neighborhood reveal">
+      <span class="eyebrow red">Location</span>
+      <h2 class="serif" style="font-weight:400; font-size:clamp(26px,4vw,38px); margin-top:14px; line-height:1.2;">The Neighborhood</h2>
+      <p class="statement">Savannah's historic district is a living museum of oaks, ironwork, and quiet squares. Here, the city's best is on foot — morning coffee, evening strolls, and everything in between.</p>
+      <div class="landmarks">
+        <div class="landmark"><span class="idx">01</span><span class="name">Forsyth Park</span><span class="dist">0.6 mi</span></div>
+        <div class="landmark"><span class="idx">02</span><span class="name">River Street</span><span class="dist">1.1 mi</span></div>
+        <div class="landmark"><span class="idx">03</span><span class="name">Broughton Street Shops</span><span class="dist">0.8 mi</span></div>
+        <div class="landmark"><span class="idx">04</span><span class="name">SCAD &amp; the Arts District</span><span class="dist">0.9 mi</span></div>
+      </div>
+    </div>
+    <div class="map-frame reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=1234%20Willow%20Lane%2C%20Savannah%2C%20GA%2031401&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to 1234 Willow Lane"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Listing Representation ===== -->
+<section class="agent" id="agent">
+  <div class="agent-inner">
+    <div class="agent-portrait reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </div>
+    <div class="agent-info reveal">
+      <span class="eyebrow red">Listing Representation</span>
+      <h2>Meghan</h2>
+      <div class="title">Listing Agent · Seabolt Real Estate</div>
+      <div class="brokerage">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Seabolt Real Estate <span class="red">912.233.6609</span>
+      </div>
+      <p class="bio">Meghan brings a discerning eye and a deep knowledge of Savannah to every listing. She would be delighted to show you this residence in person — or arrange a private tour at your convenience.</p>
+      <div class="agent-contact">
+        <a class="btn" href="tel:+19122336609">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Seabolt
+        </a>
+        <a class="btn btn-ghost" href="mailto:meghan@seaboltrealestate.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          Email Meghan
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Open House Invitation ===== -->
+<section class="invite" id="invite">
+  <div class="invite-inner reveal">
+    <span class="eyebrow">By Invitation</span>
+    <h2>Attend the Open House</h2>
+    <div class="date-line">Saturday, October 17, 2026 <span class="dot">·</span> 12 – 4 PM <span class="dot">·</span> 1234 Willow Lane</div>
+    <p>We would be honored by your presence. Kindly reserve your visit, or request a private showing at your convenience.</p>
+    <div class="invite-actions">
+      <a class="btn" href="mailto:meghan@seaboltrealestate.com?subject=RSVP%20-%20Open%20House%20Oct%2017">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        Reserve Your Visit
+      </a>
+      <a class="btn btn-ghost" href="tel:+19122336609">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Request a Private Showing
+      </a>
+    </div>
+    <a class="secondary-link" href="mailto:meghan@seaboltrealestate.com">Prefer email? Contact Meghan directly</a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="ft-brand">Seabolt Real Estate</div>
+    <div class="ft-sub">Christie's International Real Estate · Exclusive Affiliate, Coast of Georgia</div>
+    <div class="phone">912.233.6609</div>
+    <div class="addr">1234 Willow Lane · Savannah, GA 31401</div>
+    <p class="compliance">
+      Draft template preview with placeholder content — address, imagery, and details are samples to be replaced per listing.
+      GREC compliance: Seabolt Real Estate, the licensed brokerage, is presented with equal or greater prominence than any affiliated agent. Official Seabolt logo artwork to be supplied by the brokerage. Equal Housing Opportunity.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Header: transparent over hero → solid on scroll
+  var head = document.getElementById('siteHead');
+  var onScroll = function () {
+    if (window.scrollY > 40) { head.classList.add('solid'); }
+    else { head.classList.remove('solid'); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Subtle reveal on scroll
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
