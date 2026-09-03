@@ -17,6 +17,8 @@
     --red: #A33038;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  @page { size: 8.5in 11in; margin: 0; }
+  html, body { margin:0; padding:0; }
   body {
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     background: var(--white);
@@ -41,7 +43,7 @@
   /* ===== Hero photo band ===== */
   .hero {
     position: relative;
-    height: 4.35in;
+    height: 3.75in;
     background: url('img/1_dsc03593.jpg') center 55% / cover no-repeat;
   }
   .hero-overlay {
@@ -50,17 +52,17 @@
   }
   .hero-content {
     position: absolute; left:0; right:0; bottom:0; z-index:2;
-    padding: 0.5in 0.5in 0.45in;
+    padding: 0.35in 0.45in 0.32in;
     color:#fff;
   }
-  .hero .eyebrow { color: rgba(255,255,255,0.9); letter-spacing: 4px; }
+  .hero .eyebrow { color: rgba(255,255,255,0.9); letter-spacing: 4px; font-size: 9px; }
   .hero .eyebrow .red { color:#E8A0A5; }
   .hero h1 {
     font-family:"Libre Baskerville", Georgia, serif; font-weight:400;
-    font-size: 44px; line-height:1.05; letter-spacing:-0.5px; margin-top:8px;
+    font-size: 38px; line-height:1.05; letter-spacing:-0.5px; margin-top:6px;
   }
-  .hero .city { font-size: 15px; font-weight:300; letter-spacing:0.6px; color:rgba(255,255,255,0.95); margin-top:4px; }
-  .hero .price { font-family:"Libre Baskerville", Georgia, serif; font-size: 26px; margin-top:10px; }
+  .hero .city { font-size: 13px; font-weight:300; letter-spacing:0.6px; color:rgba(255,255,255,0.95); margin-top:4px; }
+  .hero .price { font-family:"Libre Baskerville", Georgia, serif; font-size: 22px; margin-top:8px; }
 
   /* ===== Stats strip ===== */
   .stats {
@@ -68,48 +70,48 @@
     border-bottom: 1px solid var(--light-gray);
   }
   .stat {
-    flex:1; text-align:center; padding: 0.28in 0.1in;
+    flex:1; text-align:center; padding: 0.2in 0.1in;
     border-left: 1px solid var(--light-gray);
   }
   .stat:first-child { border-left:none; }
-  .stat .val { font-size: 26px; font-weight:300; line-height:1; }
-  .stat .val.serif { font-family:"Libre Baskerville", Georgia, serif; font-size: 21px; }
-  .stat .lbl { font-size: 9px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; color:var(--med-gray); margin-top:8px; }
+  .stat .val { font-size: 22px; font-weight:300; line-height:1; }
+  .stat .val.serif { font-family:"Libre Baskerville", Georgia, serif; font-size: 18px; }
+  .stat .lbl { font-size: 8px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; color:var(--med-gray); margin-top:6px; }
 
   /* ===== Body ===== */
-  .body { padding: 0.42in 0.5in 0.3in; }
+  .body { padding: 0.3in 0.45in 0.2in; }
 
   .open-house {
     background: var(--black); color:#fff;
-    text-align:center; padding: 0.26in 0.2in;
+    text-align:center; padding: 0.18in 0.2in;
   }
-  .open-house .oh-label { font-size: 10px; letter-spacing:3px; text-transform:uppercase; color:#E8A0A5; font-weight:600; }
-  .open-house .oh-date { font-family:"Libre Baskerville", Georgia, serif; font-size: 24px; margin-top:6px; }
-  .open-house .oh-time { font-size: 13px; letter-spacing:1.6px; text-transform:uppercase; margin-top:4px; color: rgba(255,255,255,0.9); }
+  .open-house .oh-label { font-size: 9px; letter-spacing:3px; text-transform:uppercase; color:#E8A0A5; font-weight:600; }
+  .open-house .oh-date { font-family:"Libre Baskerville", Georgia, serif; font-size: 19px; margin-top:4px; }
+  .open-house .oh-time { font-size: 11px; letter-spacing:1.6px; text-transform:uppercase; margin-top:3px; color: rgba(255,255,255,0.9); }
 
   .description {
-    font-size: 12.5px; color: var(--dark-gray); line-height:1.65;
-    margin: 0.3in 0 0.28in;
+    font-size: 10.5px; color: var(--dark-gray); line-height:1.55;
+    margin: 0.2in 0 0.18in;
   }
 
-  .highlights { margin-bottom: 0.28in; }
-  .highlights h3 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size: 16px; margin-bottom: 10px; }
-  .hl-grid { display:flex; flex-wrap:wrap; gap: 6px 16px; }
-  .hl { font-size: 11px; color: var(--dark-gray); }
-  .hl .tick { color: var(--red); font-weight:700; margin-right:4px; }
+  .highlights { margin-bottom: 0.16in; }
+  .highlights h3 { font-family:"Libre Baskerville", Georgia, serif; font-weight:400; font-size: 14px; margin-bottom: 7px; }
+  .hl-grid { display:flex; flex-wrap:wrap; gap: 4px 14px; }
+  .hl { font-size: 9.5px; color: var(--dark-gray); }
+  .hl .tick { color: var(--red); font-weight:700; margin-right:3px; }
 
   /* ===== Footer contact ===== */
   .contact {
     border-top: 1px solid var(--light-gray);
-    padding: 0.3in 0.5in 0.34in;
+    padding: 0.22in 0.45in 0.24in;
     text-align:center;
   }
-  .contact .brand { font-size: 14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
-  .contact .sub { font-size: 8px; font-weight:500; color:#a8a8a8; letter-spacing:1.6px; text-transform:uppercase; margin-top:5px; }
+  .contact .brand { font-size: 12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+  .contact .sub { font-size: 7.5px; font-weight:500; color:#a8a8a8; letter-spacing:1.4px; text-transform:uppercase; margin-top:4px; }
   .contact .sub .red { color: var(--red); }
-  .contact .phone { font-size: 16px; font-weight:600; letter-spacing:1px; margin: 12px 0 4px; }
-  .contact .agent { font-size: 11px; color: var(--dark-gray); }
-  .contact .compliance { font-size: 8px; color:#a8a8a8; margin-top: 12px; max-width: 6.6in; margin-left:auto; margin-right:auto; line-height:1.6; }
+  .contact .phone { font-size: 14px; font-weight:600; letter-spacing:1px; margin: 8px 0 3px; }
+  .contact .agent { font-size: 9.5px; color: var(--dark-gray); }
+  .contact .compliance { font-size: 7.5px; color:#a8a8a8; margin-top: 8px; max-width: 6.8in; margin-left:auto; margin-right:auto; line-height:1.5; }
 </style>
 </head>
 <body>
